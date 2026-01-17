@@ -1,42 +1,24 @@
-<h1 align="center">Hi 👋, I'm Savio</h1>
-<h3 align="center">I'm an active OWASP contributor and Application Security Engineer working on real world AppSec, CI/CD security and vulnerabilitiy research.</h3>
+# 💫 About Me:
+🔭 I’m currently working on<br>👯 Savio here (S3DFX-CYBER). I work on Application Security and contribute to OWASP Nest. I like building and experimenting quietly, especially around secure CI/CD, web security, and AI security middleware. Currently exploring more open-source opportunities and GSOC.I’m looking to collaborate on<br>🤝 I’m looking for help with<br>🌱 I’m currently learning<br>💬 Ask me about<br>⚡ Fun fact
 
-[![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER)](https://github.com/S3DFX-CYBER/github-readme-stats)
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=s3dfx-cyber&label=Profile%20views&color=0e75b6&style=flat" alt="s3dfx-cyber" /> </p>
+## 🌐 Socials:
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/saviodsouza_59) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:saviodsouza8a@gmail.com) 
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=s3dfx-cyber" alt="s3dfx-cyber" /></a> </p>
+# 💻 Tech Stack:
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Jenkins](https://img.shields.io/badge/jenkins-%232C5263.svg?style=for-the-badge&logo=jenkins&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+# 📊 GitHub Stats:
+![](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER &theme=aura&hide_border=false&include_all_commits=true&count_private=true)<br/>
+![](https://nirzak-streak-stats.vercel.app/?user=S3DFX-CYBER &theme=aura&hide_border=false)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=S3DFX-CYBER &theme=aura&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
 
-- 🔭 I’m currently working on [OWASP NETATTACKER & OWASP BLT](https://github.com/OWASP)
+## 🏆 GitHub Trophies
+![](https://github-profile-trophy.vercel.app/?username=S3DFX-CYBER &theme=radical&no-frame=false&no-bg=false&margin-w=4)
 
-- 🌱 I’m currently learning **Secure Python development, scanner internals, CI/CD security, and SARIF reporting**
+### 🔝 Top Contributed Repo
+![](https://github-contributor-stats.vercel.app/api?username=S3DFX-CYBER &limit=5&theme=dark&combine_all_yearly_contributions=true)
 
-- 👯 I’m looking to collaborate on [OWASP security tools, vulnerability scanners, and AppSec automation projects](https://owasp.org/projects/)
+---
+[![](https://visitcount.itsvg.in/api?id=S3DFX-CYBER &icon=0&color=0)](https://visitcount.itsvg.in)
 
-- 🤝 I’m looking for help with [Advanced testing, code coverage, and scan engine improvements for security tools](https://github.com/OWASP/Nettacker)
-
-- 👨‍💻 All of my projects are available at [https://github.com/S3DFX](https://github.com/S3DFX)
-
-- 📝 I regularly write articles on [OWASP contributions, vulnerability research, and security tooling (GitHub & LinkedIn)](OWASP contributions, vulnerability research, and security tooling (GitHub & LinkedIn))
-
-- 💬 Ask me about **Application Security, OWASP projects, vulnerability disclosure, false positives in scanners**
-
-- 📫 How to reach me **saviodsouza8a@gmail.com**
-
-- 📄 Know about my experiences [OWASP Open Source | Vulnerability Research | GSoC 2026 Aspirant](OWASP Open Source | Vulnerability Research | GSoC 2026 Aspirant)
-
-- ⚡ Fun fact **I care more about reducing false positives than finding flashy bugs.**
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://instagram.com/saviodsouza_59" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="saviodsouza_59" height="30" width="40" /></a>
-</p>
-
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.jenkins.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="jenkins" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> </p>
-
-<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=s3dfx-cyber&show_icons=true&locale=en&layout=compact" alt="s3dfx-cyber" /></p>
-
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=s3dfx-cyber&show_icons=true&locale=en" alt="s3dfx-cyber" /></p>
-
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=s3dfx-cyber&" alt="s3dfx-cyber" /></p>
+<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
