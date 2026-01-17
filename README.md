@@ -1,6 +1,8 @@
 <h1 align="center">Hi 👋, I'm Savio</h1>
 <h3 align="center">I'm an active OWASP contributor and Application Security Engineer working on real world AppSec, CI/CD security and vulnerabilitiy research.</h3>
 
+[![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER)](https://github.com/S3DFX-CYBER/github-readme-stats)
+
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=s3dfx-cyber&label=Profile%20views&color=0e75b6&style=flat" alt="s3dfx-cyber" /> </p>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=s3dfx-cyber" alt="s3dfx-cyber" /></a> </p>
