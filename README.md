@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Savio</h1>
 <h3 align="center">I'm an active OWASP contributor and Application Security Engineer working on real world AppSec, CI/CD security and vulnerabilitiy research.</h3>
 
-[![GitHub Streak](https://streak-stats.demolab.com/?user=S3DFX-CYBER)](https://git.io/streak-stats)
+[![GitHub Streak](https://streak-stats.demolab.com?user=S3DFX-CYBER%20&theme=dark)](https://git.io/streak-stats)
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=s3dfx-cyber&label=Profile%20views&color=0e75b6&style=flat" alt="s3dfx-cyber" /> </p>
 
