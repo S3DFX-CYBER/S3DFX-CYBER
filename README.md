@@ -1,9 +1,7 @@
 <h1 align="center">Hi 👋, I'm Savio</h1>
 <h3 align="center">I'm an active OWASP contributor and Application Security Engineer working on real world AppSec, CI/CD security and vulnerabilitiy research.</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=s3dfx-cyber&label=Profile%20views&color=0e75b6&style=flat" alt="s3dfx-cyber" /> </p>
-
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=s3dfx-cyber" alt="s3dfx-cyber" /></a> </p>
+![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show_icons=true&theme=radical)
 
 - 🔭 I’m currently working on [OWASP NETATTACKER & OWASP BLT](https://github.com/OWASP)
 
@@ -32,7 +30,5 @@
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.jenkins.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="jenkins" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> </p>
-
-![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show_icons=true&theme=radical)
 
 ![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage)
