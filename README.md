@@ -3,7 +3,7 @@
 
 ![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show_icons=true&theme=radical)
 
-- 🔭 I’m currently working on [OWASP NETATTACKER & OWASP BLT](https://github.com/OWASP)
+- 🔭 I’m currently working on [OWASP BLT](https://github.com/OWASP)
 
 - 🌱 I’m currently learning **Secure Python development, scanner internals, CI/CD security, and SARIF reporting**
 
