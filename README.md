@@ -1,8 +1,15 @@
 <h1 align="center">Hi 👋, I'm Savio</h1>
 <h3 align="center">I'm an active OWASP contributor and Application Security Engineer working on real world AppSec, CI/CD security and vulnerabilitiy research.</h3>
 
-![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show_icons=true&theme=radical)
-
+<picture>
+  <source
+    id="dark_img" srcset="https://raw.githubusercontent.com/S3DFX-CYBER/S3DFX-CYBER/main/dark_d9ea65f9-0816-444e-84c4-bbe473e03171.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    id="light_img" srcset="https://raw.githubusercontent.com/S3DFX-CYBER/S3DFX-CYBER/main/light_ef103c59-ad08-4921-af9d-70d3f45f6c04.svg"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
 - 🔭 I’m currently working on [OWASP BLT](https://github.com/OWASP)
 
 - 🌱 I’m currently learning **Secure Python development, scanner internals, CI/CD security, and SARIF reporting**
