@@ -18,7 +18,7 @@
 
 - 🤝 I’m looking for help with [Advanced testing, code coverage, and scan engine improvements for security tools](https://github.com/OWASP/Nettacker)
 
-- 👨‍💻 All of my projects are available at [https://github.com/S3DFX](https://github.com/S3DFX)
+- 👨‍💻 All of my projects are available at [https://github.com/S3DFX-CYBER](https://github.com/S3DFX-CYBER)
 
 - 📝 I regularly write articles on [OWASP contributions, vulnerability research, and security tooling (GitHub & LinkedIn)](OWASP contributions, vulnerability research, and security tooling (GitHub & LinkedIn))
 
