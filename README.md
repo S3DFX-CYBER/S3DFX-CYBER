@@ -1,42 +1,33 @@
-<h1 align="center">Hi 👋, I'm Savio</h1>
-<h3 align="center">I'm an active OWASP contributor and Application Security Engineer working on real world AppSec, CI/CD security and vulnerabilitiy research.</h3>
+## Stack
 
-<picture>
-  <source
-    id="dark_img" srcset="https://raw.githubusercontent.com/S3DFX-CYBER/S3DFX-CYBER/main/dark_d9ea65f9-0816-444e-84c4-bbe473e03171.svg"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    id="light_img" srcset="https://raw.githubusercontent.com/S3DFX-CYBER/S3DFX-CYBER/main/light_ef103c59-ad08-4921-af9d-70d3f45f6c04.svg"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  />
-- 🔭 I’m currently working on [OWASP BLT](https://github.com/OWASP)
-
-- 🌱 I’m currently learning **Secure Python development, scanner internals, CI/CD security, and SARIF reporting**
-
-- 👯 I’m looking to collaborate on [OWASP security tools, vulnerability scanners, and AppSec automation projects](https://owasp.org/projects/)
-
-- 🤝 I’m looking for help with [Advanced testing, code coverage, and scan engine improvements for security tools](https://github.com/OWASP/Nettacker)
-
-- 👨‍💻 All of my projects are available at [https://github.com/S3DFX-CYBER](https://github.com/S3DFX-CYBER)
-
-- 📝 I regularly write articles on [OWASP contributions, vulnerability research, and security tooling (GitHub & LinkedIn)](OWASP contributions, vulnerability research, and security tooling (GitHub & LinkedIn))
-
-- 💬 Ask me about **Application Security, OWASP projects, vulnerability disclosure, false positives in scanners**
-
-- 📫 How to reach me **saviodsouza8a@gmail.com**
-
-- 📄 Know about my experiences [OWASP Open Source | Vulnerability Research | GSoC 2026 Aspirant](OWASP Open Source | Vulnerability Research | GSoC 2026 Aspirant)
-
-- ⚡ Fun fact **I care more about reducing false positives than finding flashy bugs.**
-
-<h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://instagram.com/saviodsouza_59" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="saviodsouza_59" height="30" width="40" /></a>
+  <img src="https://skillicons.dev/icons?i=python,js,bash,docker,git,linux,fastapi,redis,cloudflare,github" />
 </p>
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.jenkins.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="jenkins" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> </p>
+**Security tooling:** SonarCloud · SARIF · Nettacker · Semgrep · GitHub Actions  
+**AI/ML:** sentence-transformers · ChromaDB · Gemini Flash · Claude API · RAG pipelines  
+**Infra:** Cloudflare Workers · D1 · Vercel · FastAPI · Redis
 
-![Savio's GitHub stats](https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage)
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=S3DFX-CYBER)](https://github.com/S3DFX-CYBER/github-readme-stats)
+---
+
+## Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=S3DFX-CYBER&show_icons=true&theme=dark&show=prs_merged,prs_merged_percentage&hide_border=true&bg_color=0d1117&title_color=00ff88&icon_color=00ff88" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=S3DFX-CYBER&layout=compact&theme=dark&hide_border=true&bg_color=0d1117&title_color=00ff88" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=S3DFX-CYBER&theme=react-dark&hide_border=true&color=00ff88&line=00ff88&point=ffffff" />
+</p>
+
+---
+
+## Connect
+
+<p align="left">
+  <a href="mailto:saviodsouza8a@gmail.com"><img src="https://img.shields.io/badge/Email-saviodsouza8a%40gmail.com-red?style=flat-square&logo=gmail" /></a>
+  <a href="https://github.com/S3DFX-CYBER"><img src="https://img.shields.io/badge/GitHub-S3DFX--CYBER-black?style=flat-square&logo=github" /></a>
+</p>
+
+> *"Engineer by choice."*
