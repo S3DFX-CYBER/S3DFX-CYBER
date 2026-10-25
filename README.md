@@ -23,7 +23,7 @@
 
 <p align="center">
   <a href="https://findmygsoc.vercel.app/">
-    <strong>GSoC Org Finder</strong>
+    <strong>FindMyGSoC</strong>
   </a>
   &nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="https://tenet-aiorg.vercel.app/">
