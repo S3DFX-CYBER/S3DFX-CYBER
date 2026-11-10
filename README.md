@@ -2,6 +2,8 @@
      its own base64-embedded fonts, so they look identical on GitHub's light theme,
      dark theme, and any mirror. Numbers are a snapshot from 11 Nov 2026.
      Re-render any card with: python scripts/build_cards.py
+     To use the ASCII portrait instead of the photo, swap hero.svg for
+     hero-ascii.svg in the first <img> below (both are generated).
      Keep this block free of blank lines, and keep the cards in each row on one
      line with no spaces between them, or the 33.333% thirds will wrap. -->
 <div align="center">
