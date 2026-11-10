@@ -22,7 +22,7 @@ Refresh the graph first with:  python scripts/fetch_contributions.py
 Layout is measured with PIL against the real fonts, so the script fails loudly
 rather than shipping a card with clipped or overflowing text.
 """
-import base64, json, os, sys
+import base64, json, os, re, sys
 from fontTools.ttLib import TTFont
 from PIL import ImageFont
 
@@ -53,6 +53,8 @@ ROLES = {
     "h2":      ("#8E2055", "#F5A6C7", "fill"),
     "h3":      ("#C9327A", "#E1559A", "fill"),
     "h4":      ("#FF77B0", "#C42B74", "fill"),
+    "accent_s": ("#FF77B0", "#C42B74", "stroke"),
+    "alt_s":   ("#FFFFFF", "#1A1520", "stroke"),
     "glow":    ("#FF77B0", "#C42B74", "stop-color"),
     "glow2":   ("#FF77B0", "#C42B74", "stop-color"),
 }
@@ -215,7 +217,27 @@ def card_bg(w, h, r=16, surface=False):
             f'fill="{dark(role)}" stroke="{dark("border")}" stroke-width="1" '
             f'class="c-{role} c-border"/>')
 
+def validate(body, name):
+    """A CSS fill animation beats fill="none", so a fill role must never sit on
+    an unfilled element — that is what turned the portrait ring into wedges."""
+    for role, (_, _, prop) in ROLES.items():
+        if prop != "fill":
+            continue
+        pat = r'<[a-z]+[^>]*class="[^"]*\bc-' + role + r'\b[^"]*"[^>]*>'
+        for tag in re.findall(pat, body):
+            if 'fill="none"' in tag:
+                ISSUES.append(f"{name}: c-{role} on an unfilled element — "
+                              f"the fill animation would paint it")
+    for role, (_, _, prop) in ROLES.items():
+        if prop != "stroke":
+            continue
+        pat = r'<[a-z]+[^>]*class="[^"]*\bc-' + role + r'\b[^"]*"[^>]*>'
+        for tag in re.findall(pat, body):
+            if "stroke=" not in tag:
+                ISSUES.append(f"{name}: c-{role} on an element with no stroke")
+
 def write(name, body, w, h):
+    validate(body, name)
     open(os.path.join(OUT, name), "w").write(body + "</svg>\n")
     return os.path.getsize(os.path.join(OUT, name))
 
@@ -296,9 +318,9 @@ def build_hero():
             f'href="data:image/jpeg;base64,{P64}"/>', "f", 0.2))
     s.append(wrap_motion(
         f'<path d="M {PCX} {PCY-PR-9} A {PR+9} {PR+9} 0 0 1 {PCX+PR+9} {PCY}" '
-        f'fill="none" stroke="{dark("accent")}" stroke-width="2.5" '
-        f'stroke-linecap="round" class="c-accent"/>', "spin"))
-    s.append(arc(PCX, PCY, PR + 9, 90, 270, "alt", 2.5, 0.55))
+        f'fill="none" stroke="{dark("accent_s")}" stroke-width="2.5" '
+        f'stroke-linecap="round" class="c-accent_s"/>', "spin"))
+    s.append(arc(PCX, PCY, PR + 9, 90, 270, "alt_s", 2.5, 0.55))
     return "".join(s), W, H
 
 # ================================================================ CONTRIBUTIONS
