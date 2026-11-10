@@ -21,7 +21,7 @@
 </div>
 
 <p align="center">
-<sub><a href="https://github.com/S3DFX-CYBER/FindMyGSoC">FindMyGSoC</a> &nbsp;·&nbsp; <a href="https://github.com/TENET-DEV-AI/TENET-AI">TENET-AI</a> &nbsp;·&nbsp; <a href="https://github.com/S3DFX-CYBER/Claude-Skills-Security">Claude-Skills-Security</a> &nbsp;·&nbsp; <a href="https://github.com/S3DFX-CYBER/cve-lite-cli">cve-lite-cli</a></sub>
+<sub><a href="https://github.com/S3DFX-CYBER/FindMyGSoC">FindMyGSoC</a> &nbsp;·&nbsp; <a href="https://github.com/TENET-DEV-AI/TENET-AI">TENET-AI</a> &nbsp;·&nbsp; <a href="https://github.com/S3DFX-CYBER/Claude-Skills-Security">Claude-Skills-Security</a></sub>
 </p>
 
 <p align="center">
