@@ -5,7 +5,6 @@
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes blink{0%,45%{opacity:1}55%,100%{opacity:0}}
 @keyframes breathe{0%,100%{opacity:.45}50%{opacity:.95}}
-@keyframes sweep{from{opacity:0}to{opacity:1}}
 .r{animation:rise .75s cubic-bezier(.22,.7,.3,1) both}
 .f{animation:fade .9s ease-out both}
 .p{animation:pop .5s cubic-bezier(.22,.7,.3,1) both}
@@ -13,4 +12,4 @@
 .caret{animation:blink 1.15s steps(1,end) infinite}
 .breathe{animation:breathe 5.5s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
-</style><text x="0" y="44" font-family="Geist SemiBold" font-size="25" font-weight="400" font-style="normal" fill="#0B0910" letter-spacing="-0.4">What I'm building</text><line x1="216.6" y1="36" x2="880" y2="36" stroke="#E2DCE6"/><text x="880" y="44" font-family="Geist Mono" font-size="10.5" font-weight="400" font-style="normal" fill="#C42B74" letter-spacing="2.4" text-anchor="end">03 PROJECTS</text></svg>
+</style><text x="0" y="44" font-family="Geist SemiBold" font-size="25" font-weight="400" font-style="normal" fill="#1A1520" letter-spacing="-0.4">What I'm building</text><line x1="216.6" y1="36" x2="880" y2="36" stroke="#E7DFE8"/><text x="880" y="44" font-family="Geist Mono" font-size="10.5" font-weight="400" font-style="normal" fill="#C42B74" letter-spacing="2.4" text-anchor="end">03 PROJECTS</text></svg>
