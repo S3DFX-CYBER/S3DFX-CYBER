@@ -16,6 +16,7 @@ from PIL import ImageFont
 BASE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("CARDS_OUT") or os.path.join(BASE, "..", "cards")
 FONT_DIR = os.environ.get("FONTS_DIR") or os.path.join(BASE, "..", "fonts")
+ASSETS = os.environ.get("ASSETS_DIR") or os.path.join(BASE, "..", "assets")
 os.makedirs(OUT, exist_ok=True)
 
 # ---------------------------------------------------------------- palette
@@ -95,7 +96,8 @@ def font_face(key):
 
 def svg_open(w, h, keys, title):
     faces = "".join(font_face(k) for k in dict.fromkeys(keys))
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w:g}" height="{h:g}" '
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+            f'width="{w:g}" height="{h:g}" '
             f'viewBox="0 0 {w:g} {h:g}" role="img" aria-label="{esc(title)}">'
             f"<title>{esc(title)}</title><style>{faces}</style>")
 
@@ -131,6 +133,12 @@ def write(name, body, w, h):
     open(os.path.join(OUT, name), "w").write(body + "</svg>\n")
     return os.path.getsize(os.path.join(OUT, name))
 
+# ---------------------------------------------------------------- portrait
+PORTRAIT = os.path.join(ASSETS, "portrait.jpg")
+P64 = base64.b64encode(open(PORTRAIT, "rb").read()).decode() if os.path.exists(PORTRAIT) else None
+if not P64:
+    ISSUES.append(f"missing portrait at {PORTRAIT}")
+
 # ================================================================ 1. HERO
 W, H = 880, 264
 P = 46
@@ -148,29 +156,36 @@ s.append("<defs>"
          f'<stop offset="0" stop-color="{ACCENT}" stop-opacity="0.55"/>'
          f'<stop offset="1" stop-color="{ACCENT}" stop-opacity="0"/>'
          "</linearGradient>"
+         '<clipPath id="pf"><circle cx="734" cy="132" r="100"/></clipPath>'
          "</defs>")
 s.append(card_bg(W, H))
 s.append(f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="16" fill="url(#glow)"/>')
-# faint concentric arcs, right edge
-for r_, o in ((150, 0.30), (108, 0.45), (66, 0.60)):
-    s.append(f'<circle cx="{W+16}" cy="132" r="{r_}" fill="none" stroke="{BORDER}" '
-             f'stroke-opacity="{o}" stroke-width="1"/>')
-s.append(dot(W + 16 - 66, 132, 3, ACCENT, 0.9))
-s.append(dot(W + 16 - 108, 132, 2, ACCENT, 0.45))
+# portrait, right side, ringed
+PCX, PCY, PR = 734, 132, 100
+s.append(f'<circle cx="{PCX}" cy="{PCY}" r="{PR+11}" fill="none" stroke="{BORDER}" '
+         f'stroke-opacity="0.55" stroke-width="1"/>')
+if P64:
+    s.append(f'<image x="{PCX-PR}" y="{PCY-PR}" width="{2*PR}" height="{2*PR}" '
+             f'clip-path="url(#pf)" preserveAspectRatio="xMidYMid slice" '
+             f'xlink:href="data:image/jpeg;base64,{P64}" '
+             f'href="data:image/jpeg;base64,{P64}"/>')
+s.append(f'<circle cx="{PCX}" cy="{PCY}" r="{PR+0.5}" fill="none" stroke="{ACCENT}" '
+         f'stroke-opacity="0.28" stroke-width="1.5"/>')
+s.append(dot(PCX + 0.707*(PR+11), PCY - 0.707*(PR+11), 2.5, ACCENT, 0.8))
 
 s.append(txt(P, 56, "SECURITY ENGINEERING / AI SAFETY", "mono400", 11.5, ACCENT, 2.4))
 fit("SECURITY ENGINEERING / AI SAFETY", "mono400", 11.5, 420, 2.4, "hero kicker")
 
-s.append(txt(W - P, 56, "MUMBAI, IN", "mono400", 11.5, MUTED, 2.4, anchor="end"))
+s.append(txt(610, 56, "MUMBAI, IN", "mono400", 11.5, MUTED, 2.4, anchor="end"))
 fit("MUMBAI, IN", "mono400", 11.5, 160, 2.4, "hero loc")
 
 name = "Savio Dsouza"
 s.append(txt(P - 2, 132, name, "geist600", 60, INK, -1.2))
-fit(name, "geist600", 60, W - 2 * P - 150, -1.2, "hero name")
+fit(name, "geist600", 60, 540, -1.2, "hero name")
 
 sub = "AppSec engineer and AI security researcher."
 s.append(txt(P, 168, sub, "geist400", 19, MUTED))
-fit(sub, "geist400", 19, W - 2 * P - 120, 0, "hero sub")
+fit(sub, "geist400", 19, 540, 0, "hero sub")
 
 s.append(f'<rect x="{P}" y="196" width="88" height="1.5" fill="url(#rule)"/>')
 
@@ -186,8 +201,8 @@ for label, col in chips:
     s.append(dot(cx + 13, 229, 3, col))
     s.append(txt(cx + 22, 233.5, label, "mono400", 11, INK, 1.0))
     cx += cw + 10
-if cx > W - P:
-    ISSUES.append(f"hero chips overflow: {cx:.0f} > {W-P}")
+if cx > PCX - PR - 34:
+    ISSUES.append(f"hero chips overflow: {cx:.0f} > {PCX - PR - 34:.0f}")
 sizes = {"hero.svg": write("hero.svg", "".join(s), W, H)}
 
 # ================================================================ 2. STATS
