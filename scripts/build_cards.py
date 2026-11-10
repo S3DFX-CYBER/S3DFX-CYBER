@@ -34,9 +34,9 @@ DATA = os.environ.get("DATA_DIR") or os.path.join(BASE, "..", "data")
 os.makedirs(OUT, exist_ok=True)
 
 CYCLE = 60          # seconds for a full dark -> light -> dark rotation
-HOLD = 40           # % the dark layer holds before it starts to fade
-MID = 50            # % the light layer is fully in
-BACK = 90           # % the light layer starts to fade back
+HOLD = 48.5         # % the dark layer holds before it starts to fade
+MID = 51            # % the light layer is fully in  (fade = 1.5s, was 6s)
+BACK = 97.5         # % the light layer starts to fade back
 EASE = "cubic-bezier(.62,0,.38,1)"   # shared easing keeps the two layers summing to 1
 
 # ---------------------------------------------------------------- palettes
