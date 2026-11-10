@@ -37,6 +37,7 @@ CYCLE = 60          # seconds for a full dark -> light -> dark rotation
 HOLD = 40           # % the dark layer holds before it starts to fade
 MID = 50            # % the light layer is fully in
 BACK = 90           # % the light layer starts to fade back
+EASE = "cubic-bezier(.62,0,.38,1)"   # shared easing keeps the two layers summing to 1
 
 # ---------------------------------------------------------------- palettes
 PAL = {
@@ -68,8 +69,8 @@ def contrast(a, b):
     return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
 
 MOTION = f"""
-@keyframes d-swap{{0%,{HOLD}%{{opacity:1}}{MID}%,{BACK}%{{opacity:0}}100%{{opacity:1}}}}
-@keyframes l-swap{{0%,{HOLD}%{{opacity:0}}{MID}%,{BACK}%{{opacity:1}}100%{{opacity:0}}}}
+@keyframes d-swap{{0%,{HOLD}%{{opacity:1;animation-timing-function:{EASE}}}{MID}%,{BACK}%{{opacity:0;animation-timing-function:{EASE}}}100%{{opacity:1}}}}
+@keyframes l-swap{{0%,{HOLD}%{{opacity:0;animation-timing-function:{EASE}}}{MID}%,{BACK}%{{opacity:1;animation-timing-function:{EASE}}}100%{{opacity:0}}}}
 .lay-d{{animation:d-swap {CYCLE}s linear infinite}}
 .lay-l{{animation:l-swap {CYCLE}s linear infinite}}
 @keyframes rise{{from{{opacity:0;transform:translateY(9px)}}to{{opacity:1;transform:translateY(0)}}}}
@@ -365,12 +366,15 @@ def stat_content(p, i, label, value, l1, l2):
 TIT_W, TIT_H = 880, 74
 def title_content(p):
     TW, TH = TIT_W, TIT_H
-    s = [txt(0, 44, "What I'm building", "geist600", 25, p["ink"], -0.4,
-             motion="r", delay=0.05)]
-    tw = measure("geist600", 25, "What I'm building", -0.4)
+    # every card carries its own background: the title used to rely on the page
+    # behind it, so in the light phase its dark ink vanished on a dark theme
+    s = [card_bg(TW, TH, p, r=14)]
+    s.append(txt(24, 44, "What I'm building", "geist600", 25, p["ink"], -0.4,
+                 motion="r", delay=0.05))
+    tw = 24 + measure("geist600", 25, "What I'm building", -0.4)
     s.append(wrap_motion(
-        f'<line x1="{tw+18:.1f}" y1="36" x2="{TW}" y2="36" stroke="{p["border"]}"/>', "f", 0.3))
-    s.append(txt(TW, 44, "03 PROJECTS", "mono400", 10.5, p["accent"], 2.4, anchor="end",
+        f'<line x1="{tw+18:.1f}" y1="36" x2="{TW-24}" y2="36" stroke="{p["border"]}"/>', "f", 0.3))
+    s.append(txt(TW - 24, 44, "03 PROJECTS", "mono400", 10.5, p["accent"], 2.4, anchor="end",
                  motion="f", delay=0.45))
     return "".join(s)
 
