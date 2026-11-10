@@ -12,4 +12,4 @@
 .caret{animation:blink 1.15s steps(1,end) infinite}
 .breathe{animation:breathe 5.5s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
-</style><text x="0" y="44" font-family="Geist SemiBold" font-size="25" font-weight="400" font-style="normal" fill="#F7F5F9" letter-spacing="-0.4">What I'm building</text><line x1="216.6" y1="36" x2="880" y2="36" stroke="#251D30"/><text x="880" y="44" font-family="Geist Mono" font-size="10.5" font-weight="400" font-style="normal" fill="#FF77B0" letter-spacing="2.4" text-anchor="end">03 PROJECTS</text></svg>
+</style><text x="0" y="44" font-family="Geist SemiBold" font-size="25" font-weight="400" font-style="normal" fill="#F7F5F9" letter-spacing="-0.4" class="r" style="animation-delay:0.05s">What I'm building</text><line x1="216.6" y1="36" x2="880" y2="36" stroke="#251D30" class="f" style="animation-delay:0.3s"/><text x="880" y="44" font-family="Geist Mono" font-size="10.5" font-weight="400" font-style="normal" fill="#FF77B0" letter-spacing="2.4" text-anchor="end" class="f" style="animation-delay:0.45s">03 PROJECTS</text></svg>
