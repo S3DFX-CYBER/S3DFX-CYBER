@@ -45,7 +45,7 @@ PAL = {
         "canvas": "#0B0910", "surface": "#120E17", "chip": "#171320",
         "border": "#251D30", "ink": "#F7F5F9", "muted": "#A79EB0",
         "accent": "#FF77B0", "alt": "#FFFFFF", "faint": "#3D3448",
-        "link": "#7A6F86",
+        "link": "#7A6F86", "ring": "#5A4C66",
         "heat": ["#1A1420", "#4A1832", "#8E2055", "#C9327A", "#FF77B0"],
         "glow": "#FF77B0", "glow_op": 0.16, "glow_op2": 0.03,
     },
@@ -53,7 +53,7 @@ PAL = {
         "canvas": "#FBF8FB", "surface": "#FFFFFF", "chip": "#F6F1F5",
         "border": "#E7DFE8", "ink": "#1A1520", "muted": "#6E6478",
         "accent": "#C42B74", "alt": "#1A1520", "faint": "#C9BECE",
-        "link": "#8A7F94",
+        "link": "#8A7F94", "ring": "#CFC4D4",
         "heat": ["#F2EAEF", "#FBD6E5", "#F5A6C7", "#E1559A", "#C42B74"],
         "glow": "#C42B74", "glow_op": 0.10, "glow_op2": 0.02,
     },
@@ -226,6 +226,26 @@ except FileNotFoundError:
     DATAJ = None
     ISSUES.append("missing data/contributions.json — run scripts/fetch_contributions.py")
 
+try:
+    ORGS = json.load(open(os.path.join(DATA, "orgs.json")))["orgs"]
+except FileNotFoundError:
+    ORGS = []
+    ISSUES.append("missing data/orgs.json — run scripts/fetch_orgs.py")
+
+ORG_B64 = []
+for o in ORGS:
+    f = os.path.join(ASSETS, o["file"])
+    if os.path.exists(f):
+        ORG_B64.append((o["login"], o["prs"],
+                        base64.b64encode(open(f, "rb").read()).decode()))
+    else:
+        ISSUES.append(f"missing logo {f}")
+ORG_SHARED = ("<defs>" + "".join(
+    f'<image id="org-{i}" width="30" height="30" '
+    f'xlink:href="data:image/png;base64,{b}"/>'
+    for i, (_, _, b) in enumerate(ORG_B64)) + "</defs>") if ORG_B64 else ""
+ORG_PRS = sum(p_ for _, p_, _ in ORG_B64)
+
 sizes = {}
 
 # ================================================================ HERO
@@ -289,11 +309,10 @@ def hero_content(p):
 HERO_SHARED = (f'<defs><clipPath id="pf"><circle cx="734" cy="132" r="100"/></clipPath>'
                f'<image id="pic" x="634" y="32" width="200" height="200" clip-path="url(#pf)" '
                f'preserveAspectRatio="xMidYMid slice" '
-               f'xlink:href="data:image/jpeg;base64,{P64}" '
-               f'href="data:image/jpeg;base64,{P64}"/></defs>') if P64 else ""
+               f'xlink:href="data:image/jpeg;base64,{P64}"/></defs>') if P64 else ""
 
 # ================================================================ CONTRIBUTIONS
-CON_W, CON_H = 880, 236
+CON_W, CON_H = 880, 312
 def contributions_content(p):
     d = DATAJ
     KW, KH = CON_W, CON_H
@@ -335,12 +354,31 @@ def contributions_content(p):
            ("BUSIEST DAY", f"{d['busiest']['count']} ON {d['busiest']['date']}")]
     bx = 30
     for i, (lab, val) in enumerate(row):
-        s.append(txt(bx, KH - 30, lab, "mono400", 9, p["muted"], 1.6, motion="f",
+        s.append(txt(bx, 206, lab, "mono400", 9, p["muted"], 1.6, motion="f",
                      delay=round(0.5 + i*0.1, 2)))
-        s.append(txt(bx, KH - 12, val, "geist600", 14, p["ink"], -0.1, motion="f",
+        s.append(txt(bx, 224, val, "geist600", 14, p["ink"], -0.1, motion="f",
                      delay=round(0.55 + i*0.1, 2)))
         fit(val, "geist600", 14, 240, -0.1, f"contrib stat {lab}")
         bx += 250
+
+    # organisations contributed to, under a hairline
+    s.append(f'<line x1="30" y1="246" x2="{KW-30}" y2="246" stroke="{p["border"]}"/>')
+    s.append(txt(30, 278, "CONTRIBUTED TO", "mono400", 9.5, p["accent"], 1.6,
+                 motion="f", delay=0.7))
+    ox = 150
+    for i, (login, _, _) in enumerate(ORG_B64):
+        s.append(wrap_motion(
+            f'<circle cx="{ox+15:.1f}" cy="277" r="15" fill="none" stroke="{p["ring"]}"/>'
+            f'<use xlink:href="#org-{i}" href="#org-{i}" x="{ox:.1f}" y="262"/>',
+            "f", round(0.7 + i*0.04, 2)))
+        ox += 40
+    note = f"{ORG_PRS} PULL REQUESTS"
+    note_w = measure("mono400", 9, note, 1.4)
+    if ox - 10 > KW - 30 - note_w - 20:
+        ISSUES.append(f"org logo row collides with the count: {ox-10:.0f} vs "
+                      f"{KW - 30 - note_w - 20:.0f}")
+    s.append(txt(KW - 30, 278, note, "mono400", 9, p["muted"],
+                 1.4, anchor="end", motion="f", delay=0.9))
     return "".join(s)
 
 # ================================================================ STATS
@@ -469,11 +507,13 @@ build("hero.svg", ["geist600", "geist400", "mono400"],
       hero_content, HERO_W, HERO_H, HERO_SHARED)
 
 if DATAJ:
+    _orgs = ", ".join(l for l, _, _ in ORG_B64)
     build("contributions.svg", ["geist600", "geist400", "mono400"],
           f"Contribution graph: {DATAJ['total']} contributions in the last 12 months, "
           f"current streak {DATAJ['current_streak']} days, longest streak "
-          f"{DATAJ['longest_streak']} days.",
-          contributions_content, CON_W, CON_H)
+          f"{DATAJ['longest_streak']} days. Contributed to {len(ORG_B64)} "
+          f"organisations: {_orgs}.",
+          contributions_content, CON_W, CON_H, ORG_SHARED)
 
 for i, l, v, a, b in STATS:
     build(f"stat-{i}.svg", ["geist600", "geist400", "mono400"],
