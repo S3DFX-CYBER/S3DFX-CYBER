@@ -508,7 +508,7 @@ build("hero.svg", ["geist600", "geist400", "mono400"],
 
 if DATAJ:
     _orgs = ", ".join(l for l, _, _ in ORG_B64)
-    build("contributions.svg", ["geist600", "geist400", "mono400"],
+    build("contributions-graph.svg", ["geist600", "geist400", "mono400"],
           f"Contribution graph: {DATAJ['total']} contributions in the last 12 months, "
           f"current streak {DATAJ['current_streak']} days, longest streak "
           f"{DATAJ['longest_streak']} days. Contributed to {len(ORG_B64)} "
