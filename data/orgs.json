@@ -1,0 +1,78 @@
+{
+ "generated": "2026-11-12",
+ "orgs": [
+  {
+   "login": "TENET-DEV-AI",
+   "prs": 32,
+   "file": "logos/TENET-DEV-AI.png"
+  },
+  {
+   "login": "angular",
+   "prs": 9,
+   "file": "logos/angular.png"
+  },
+  {
+   "login": "OWASP",
+   "prs": 8,
+   "file": "logos/OWASP.png"
+  },
+  {
+   "login": "metacall",
+   "prs": 3,
+   "file": "logos/metacall.png"
+  },
+  {
+   "login": "owasp-vwad",
+   "prs": 2,
+   "file": "logos/owasp-vwad.png"
+  },
+  {
+   "login": "openclaw",
+   "prs": 2,
+   "file": "logos/openclaw.png"
+  },
+  {
+   "login": "accuknox",
+   "prs": 1,
+   "file": "logos/accuknox.png"
+  },
+  {
+   "login": "open-telemetry",
+   "prs": 1,
+   "file": "logos/open-telemetry.png"
+  },
+  {
+   "login": "falcosecurity",
+   "prs": 1,
+   "file": "logos/falcosecurity.png"
+  },
+  {
+   "login": "redis",
+   "prs": 1,
+   "file": "logos/redis.png"
+  },
+  {
+   "login": "GenAI-Security-Project",
+   "prs": 1,
+   "file": "logos/GenAI-Security-Project.png"
+  },
+  {
+   "login": "wagtail",
+   "prs": 1,
+   "file": "logos/wagtail.png"
+  },
+  {
+   "login": "google",
+   "prs": 1,
+   "file": "logos/google.png"
+  },
+  {
+   "login": "google-gemini",
+   "prs": 1,
+   "file": "logos/google-gemini.png"
+  }
+ ],
+ "org_prs": 64,
+ "total_authored_prs": 188,
+ "source": "all PRs authored by S3DFX-CYBER; owners filtered to GitHub type=Organization"
+}
