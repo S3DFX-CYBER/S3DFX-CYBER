@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-12",
+ "generated": "2026-11-20",
  "orgs": [
   {
    "login": "TENET-DEV-AI",
@@ -7,14 +7,14 @@
    "file": "logos/TENET-DEV-AI.png"
   },
   {
+   "login": "OWASP",
+   "prs": 11,
+   "file": "logos/OWASP.png"
+  },
+  {
    "login": "angular",
    "prs": 9,
    "file": "logos/angular.png"
-  },
-  {
-   "login": "OWASP",
-   "prs": 8,
-   "file": "logos/OWASP.png"
   },
   {
    "login": "metacall",
@@ -72,7 +72,7 @@
    "file": "logos/google-gemini.png"
   }
  ],
- "org_prs": 64,
- "total_authored_prs": 188,
- "source": "all PRs authored by S3DFX-CYBER; owners filtered to GitHub type=Organization"
+ "org_prs": 67,
+ "total_authored_prs": 192,
+ "source": "all PRs authored by the user; owners filtered to GitHub type=Organization"
 }

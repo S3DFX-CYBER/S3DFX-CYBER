@@ -1,0 +1,52 @@
+name: Refresh profile cards
+
+# Everything on the cards that can change, changes here: the contribution graph
+# and streaks, the organisations and their logos, and the star counts. The cards
+# are then rebuilt, so the profile is never more than a day behind.
+on:
+  schedule:
+    - cron: "17 3 * * *"      # 03:17 UTC = 08:47 IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-profile-cards
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install renderer dependencies
+        run: pip install --quiet fonttools pillow
+
+      - name: Refresh data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/fetch_contributions.py
+          python scripts/fetch_orgs.py
+          python scripts/fetch_stats.py
+
+      - name: Rebuild cards
+        run: python scripts/build_cards.py
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Nothing changed today."
+            exit 0
+          fi
+          git add -A
+          git commit -m "chore(cards): refresh profile data [skip ci]"
+          git push
