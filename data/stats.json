@@ -1,0 +1,26 @@
+{
+ "generated": "2026-11-21",
+ "repos": [
+  {
+   "owner": "S3DFX-CYBER",
+   "repo": "FindMyGSoC",
+   "stars": 180,
+   "language": "HTML",
+   "forks": 571
+  },
+  {
+   "owner": "TENET-DEV-AI",
+   "repo": "TENET-AI",
+   "stars": 14,
+   "language": "TypeScript",
+   "forks": 38
+  },
+  {
+   "owner": "S3DFX-CYBER",
+   "repo": "Claude-Skills-Security",
+   "stars": 8,
+   "language": null,
+   "forks": 1
+  }
+ ]
+}

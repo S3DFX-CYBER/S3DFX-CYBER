@@ -22,7 +22,7 @@ the static attributes are the dark layer, so a frozen card is still correct.
 Run from the repo root:  pip install fonttools pillow  &&  python scripts/build_cards.py
 Refresh the graph first with:  python scripts/fetch_contributions.py
 """
-import base64, json, os, re, sys
+import base64, json, os, re, sys, tempfile
 from fontTools.ttLib import TTFont
 from PIL import ImageFont
 
@@ -42,20 +42,20 @@ EASE = "cubic-bezier(.62,0,.38,1)"   # shared easing keeps the two layers summin
 # ---------------------------------------------------------------- palettes
 PAL = {
     "dark": {
-        "canvas": "#0B0910", "surface": "#120E17", "chip": "#171320",
-        "border": "#251D30", "ink": "#F7F5F9", "muted": "#A79EB0",
-        "accent": "#FF77B0", "alt": "#FFFFFF", "faint": "#3D3448",
-        "link": "#7A6F86", "ring": "#5A4C66",
-        "heat": ["#1A1420", "#4A1832", "#8E2055", "#C9327A", "#FF77B0"],
-        "glow": "#FF77B0", "glow_op": 0.16, "glow_op2": 0.03,
+        "canvas": "#0B0710", "surface": "#130E19", "chip": "#1A1322",
+        "border": "#2A2035", "ink": "#F9F6FA", "muted": "#A99FB4",
+        "accent": "#FF2D78", "accent2": "#A855F7", "alt": "#FFFFFF",
+        "faint": "#3F3450", "link": "#7E7290", "ring": "#5E4F70",
+        "heat": ["#2A1220", "#7A1540", "#D81B60", "#FF2D78", "#A855F7"],
+        "glow": "#FF2D78", "glow_op": 0.20, "glow_op2": 0.04,
     },
     "light": {
-        "canvas": "#FBF8FB", "surface": "#FFFFFF", "chip": "#F6F1F5",
-        "border": "#E7DFE8", "ink": "#1A1520", "muted": "#6E6478",
-        "accent": "#C42B74", "alt": "#1A1520", "faint": "#C9BECE",
-        "link": "#8A7F94", "ring": "#CFC4D4",
-        "heat": ["#F2EAEF", "#FBD6E5", "#F5A6C7", "#E1559A", "#C42B74"],
-        "glow": "#C42B74", "glow_op": 0.10, "glow_op2": 0.02,
+        "canvas": "#FDF9FC", "surface": "#FFFFFF", "chip": "#FAF2F7",
+        "border": "#EADCE6", "ink": "#150F1A", "muted": "#6B6076",
+        "accent": "#D1005A", "accent2": "#6D28D9", "alt": "#150F1A",
+        "faint": "#D5C8DD", "link": "#8B7F96", "ring": "#D8C9E0",
+        "heat": ["#F8E9F0", "#FBC3DA", "#F98AB4", "#EE2E7C", "#7C3AED"],
+        "glow": "#FF2D78", "glow_op": 0.13, "glow_op2": 0.03,
     },
 }
 
@@ -82,7 +82,7 @@ MOTION = f"""
 .r{{animation:rise .75s cubic-bezier(.22,.7,.3,1) both}}
 .f{{animation:fade .9s ease-out both}}
 .p{{animation:pop .5s cubic-bezier(.22,.7,.3,1) both}}
-.spin{{animation:spin 44s linear infinite;transform-origin:734px 132px}}
+.spin{{animation:spin 44s linear infinite;transform-origin:730px 168px}}
 .caret{{animation:blink 1.15s steps(1,end) infinite}}
 .breathe{{animation:breathe 5.5s ease-in-out infinite}}
 @media (prefers-reduced-motion:reduce){{*{{animation:none!important}}}}
@@ -94,7 +94,7 @@ WOFFS = {"geist400": "geist-400.woff", "geist600": "geist-600.woff",
          "serifit": "serif-italic.woff"}
 FONTS = {}
 for k, fn in WOFFS.items():
-    ttf = os.path.join(FONT_DIR, f"{k}.ttf")
+    ttf = os.path.join(tempfile.gettempdir(), f"cardfont-{k}.ttf")   # scratch, not a source file
     f = TTFont(os.path.join(FONT_DIR, fn))
     fam, sub = f["name"].getDebugName(1), f["name"].getDebugName(2)
     f.flavor = None
@@ -249,7 +249,7 @@ ORG_PRS = sum(p_ for _, p_, _ in ORG_B64)
 sizes = {}
 
 # ================================================================ HERO
-HERO_W, HERO_H = 880, 264
+HERO_W, HERO_H = 880, 336
 def hero_content(p):
     W, H, P = HERO_W, HERO_H, 46
     s = [f'<defs><radialGradient id="glow" cx="0.12" cy="0.02" r="0.9">'
@@ -270,32 +270,41 @@ def hero_content(p):
     s.append(txt(610, 60, "MUMBAI, IN", "mono400", 11.5, p["muted"], 2.4, anchor="end",
                  motion="f", delay=0.5))
 
-    s.append(txt(P - 2, 132, "Savio Dsouza", "geist600", 60, p["ink"], -1.2,
+    # display type: Instrument Serif, surname italic — the reference's move
+    ns = 82
+    while ns > 56 and (measure("serif400", ns, "Savio", -1.0) > 470 or
+                       measure("serifit", ns, "Dsouza", -1.0) > 470):
+        ns -= 2
+    s.append(txt(P - 4, 146, "Savio", "serif400", ns, p["ink"], -1.0,
                  motion="r", delay=0.15))
-    fit("Savio Dsouza", "geist600", 60, 470, -1.2, "hero name")
+    fit("Savio", "serif400", ns, 480, -1.0, "hero first name")
+    s.append(txt(P - 4, 220, "Dsouza", "serifit", ns, p["accent"], -1.0,
+                 motion="r", delay=0.25))
+    fit("Dsouza", "serifit", ns, 480, -1.0, "hero surname")
+
     sub = "AppSec engineer and AI security researcher."
-    s.append(txt(P, 168, sub, "geist400", 19, p["muted"], motion="r", delay=0.3))
-    fit(sub, "geist400", 19, 470, 0, "hero sub")
+    s.append(txt(P, 252, sub, "geist400", 19, p["muted"], motion="r", delay=0.35))
+    fit(sub, "geist400", 19, 500, 0, "hero sub")
 
     s.append(wrap_motion(
-        rect(P, 190, 120, 3, p["accent"], rx=1.5, fill_opacity=0.9) +
-        rect(P + 74, 190, 46, 3, p["alt"], rx=1.5, fill_opacity=0.85), "r", 0.42))
+        rect(P, 268, 120, 3, p["accent"], rx=1.5, fill_opacity=0.95) +
+        rect(P + 74, 268, 46, 3, p["accent2"], rx=1.5, fill_opacity=0.95), "r", 0.45))
 
-    chips = [("CVE-2026-40316", p["accent"]), ("OWASP LLM09 CO-LEAD", p["alt"]),
+    chips = [("CVE-2026-40316", p["accent"]), ("OWASP LLM09 CO-LEAD", p["accent2"]),
              ("OWASP BLT", p["accent"])]
     cx = P
     for i, (label, col) in enumerate(chips):
         tw = fit(label, "mono400", 11, 260, 1.0, "hero chip")
         cw = tw + 34
-        inner = (rect(cx, 214, cw, 30, p["chip"], rx=6, stroke=p["border"], stroke_width=1) +
-                 dot(cx + 13, 229, 3, col) +
-                 txt(cx + 22, 233.5, label, "mono400", 11, p["ink"], 1.0))
-        s.append(wrap_motion(inner, "r", round(0.54 + i*0.08, 2)))
+        inner = (rect(cx, 284, cw, 30, p["chip"], rx=6, stroke=p["border"], stroke_width=1) +
+                 dot(cx + 13, 299, 3, col) +
+                 txt(cx + 22, 303.5, label, "mono400", 11, p["ink"], 1.0))
+        s.append(wrap_motion(inner, "r", round(0.55 + i*0.08, 2)))
         cx += cw + 10
     if cx > 600:
         ISSUES.append(f"hero chips overflow: {cx:.0f} > 600")
 
-    PCX, PCY, PR = 734, 132, 100
+    PCX, PCY, PR = 730, 168, 104
     s.append(f'<circle cx="{PCX}" cy="{PCY}" r="{PR+9}" fill="none" '
              f'stroke="{p["border"]}"/>')
     s.append(wrap_motion('<use xlink:href="#pic" href="#pic"/>', "f", 0.2))
@@ -306,25 +315,35 @@ def hero_content(p):
     s.append(arc(PCX, PCY, PR + 9, 90, 270, p["alt"], 2.5, 0.55))
     return "".join(s)
 
-HERO_SHARED = (f'<defs><clipPath id="pf"><circle cx="734" cy="132" r="100"/></clipPath>'
-               f'<image id="pic" x="634" y="32" width="200" height="200" clip-path="url(#pf)" '
+HERO_SHARED = (f'<defs><clipPath id="pf"><circle cx="730" cy="168" r="104"/></clipPath>'
+               f'<image id="pic" x="626" y="64" width="208" height="208" clip-path="url(#pf)" '
                f'preserveAspectRatio="xMidYMid slice" '
                f'xlink:href="data:image/jpeg;base64,{P64}"/></defs>') if P64 else ""
 
 # ================================================================ CONTRIBUTIONS
-CON_W, CON_H = 880, 312
+CON_W, CON_H = 880, 330
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 def contributions_content(p):
     d = DATAJ
     KW, KH = CON_W, CON_H
     s = [card_bg(KW, KH, p, r=14, surface=True)]
-    s.append(txt(30, 42, "CONTRIBUTIONS", "mono400", 10.5, p["accent"], 2.4,
-                 motion="f", delay=0.05))
-    s.append(txt(KW - 30, 42, f"{d['total']:,} IN THE LAST 12 MONTHS", "mono400", 10.5,
-                 p["muted"], 1.8, anchor="end", motion="f", delay=0.2))
+
+    # serif heading, the reference's "Every day, in blue" move
+    head_a, head_b = "Every day,", "in pink."
+    s.append(txt(30, 54, head_a, "serif400", 27, p["ink"], -0.2,
+                 motion="r", delay=0.05))
+    ha = measure("serif400", 27, head_a, -0.2)
+    s.append(txt(30 + ha + 9, 54, head_b, "serifit", 27, p["accent"], -0.2,
+                 motion="r", delay=0.12))
+    fit(head_a + head_b, "serif400", 27, 420, -0.2, "graph heading")
+    s.append(txt(KW - 30, 54, f"{d['total']:,} CONTRIBUTIONS · REFRESHED DAILY", "mono400",
+                 10.5, p["muted"], 1.8, anchor="end", motion="f", delay=0.2))
 
     CELL, GAP = 11.0, 3.0
     gx = (KW - (d["cols"] * (CELL + GAP) - GAP)) / 2
-    gy = 62.0
+    gy = 76.0
     order = {}
     for i, day in enumerate(d["days"]):
         r_, c_ = divmod(i, d["cols"])
@@ -341,35 +360,56 @@ def contributions_content(p):
                           motion="p", delay=delay,
                           extra_style=f"transform-origin:{x+CELL/2:.1f}px {y+CELL/2:.1f}px;"))
 
+    # month labels: one per month, dropped if it would crowd the previous one
+    # or run into the legend block on the right
+    legend_left = KW - 30 - (5 * (CELL + GAP) - GAP) - 46 - 8 - measure("mono400", 9, "LESS", 1.2) - 12
+    seen, last_col = set(), -9
+    for i, day in enumerate(d["days"]):
+        _, c_ = divmod(i, d["cols"])
+        key = day["d"][:7]
+        if key in seen:
+            continue
+        seen.add(key)
+        if c_ - last_col < 3:
+            continue
+        if gx + c_ * (CELL + GAP) + measure("mono400", 9, MONTHS[int(key[5:7]) - 1], 0.6) > legend_left:
+            continue
+        s.append(txt(gx + c_ * (CELL + GAP), gy + d["rows"] * (CELL + GAP) + 16,
+                     MONTHS[int(key[5:7]) - 1], "mono400", 9, p["muted"], 0.6,
+                     motion="f", delay=0.6))
+        last_col = c_
+
     lx = KW - 30 - (5 * (CELL + GAP) - GAP) - 46
-    ly = gy + d["rows"] * (CELL + GAP) + 12
+    ly = gy + d["rows"] * (CELL + GAP) + 5
     s.append(txt(lx - 8, ly + 9, "LESS", "mono400", 9, p["muted"], 1.2, anchor="end"))
     for i in range(5):
         s.append(rect(lx + i*(CELL+GAP), ly, CELL, CELL, p["heat"][i], rx=2.5,
                       stroke=p["border"], stroke_width=0.5))
     s.append(txt(lx + 5 * (CELL + GAP) + 4, ly + 9, "MORE", "mono400", 9, p["muted"], 1.2))
 
+    _bd = d["busiest"]["date"]
+    _pretty = f"{int(_bd[8:10])} {MONTHS[int(_bd[5:7]) - 1].upper()} {_bd[:4]}"
     row = [("CURRENT STREAK", f"{d['current_streak']} DAYS"),
            ("LONGEST STREAK", f"{d['longest_streak']} DAYS"),
-           ("BUSIEST DAY", f"{d['busiest']['count']} ON {d['busiest']['date']}")]
+           ("BUSIEST DAY", f"{d['busiest']['count']} ON {_pretty}")]
     bx = 30
     for i, (lab, val) in enumerate(row):
-        s.append(txt(bx, 206, lab, "mono400", 9, p["muted"], 1.6, motion="f",
+        s.append(txt(bx, 222, lab, "mono400", 9, p["muted"], 1.6, motion="f",
                      delay=round(0.5 + i*0.1, 2)))
-        s.append(txt(bx, 224, val, "geist600", 14, p["ink"], -0.1, motion="f",
+        s.append(txt(bx, 240, val, "geist600", 14, p["ink"], -0.1, motion="f",
                      delay=round(0.55 + i*0.1, 2)))
         fit(val, "geist600", 14, 240, -0.1, f"contrib stat {lab}")
         bx += 250
 
     # organisations contributed to, under a hairline
-    s.append(f'<line x1="30" y1="246" x2="{KW-30}" y2="246" stroke="{p["border"]}"/>')
-    s.append(txt(30, 278, "CONTRIBUTED TO", "mono400", 9.5, p["accent"], 1.6,
+    s.append(f'<line x1="30" y1="262" x2="{KW-30}" y2="262" stroke="{p["border"]}"/>')
+    s.append(txt(30, 294, "CONTRIBUTED TO", "mono400", 9.5, p["accent"], 1.6,
                  motion="f", delay=0.7))
     ox = 150
     for i, (login, _, _) in enumerate(ORG_B64):
         s.append(wrap_motion(
-            f'<circle cx="{ox+15:.1f}" cy="277" r="15" fill="none" stroke="{p["ring"]}"/>'
-            f'<use xlink:href="#org-{i}" href="#org-{i}" x="{ox:.1f}" y="262"/>',
+            f'<circle cx="{ox+15:.1f}" cy="293" r="15" fill="none" stroke="{p["ring"]}"/>'
+            f'<use xlink:href="#org-{i}" href="#org-{i}" x="{ox:.1f}" y="278"/>',
             "f", round(0.7 + i*0.04, 2)))
         ox += 40
     note = f"{ORG_PRS} PULL REQUESTS"
@@ -377,7 +417,7 @@ def contributions_content(p):
     if ox - 10 > KW - 30 - note_w - 20:
         ISSUES.append(f"org logo row collides with the count: {ox-10:.0f} vs "
                       f"{KW - 30 - note_w - 20:.0f}")
-    s.append(txt(KW - 30, 278, note, "mono400", 9, p["muted"],
+    s.append(txt(KW - 30, 294, note, "mono400", 9, p["muted"],
                  1.4, anchor="end", motion="f", delay=0.9))
     return "".join(s)
 
@@ -482,18 +522,34 @@ def quote_content(p):
     return "".join(s)
 
 # ================================================================ emit
+try:
+    _ST = json.load(open(os.path.join(DATA, "stats.json")))["repos"]
+except FileNotFoundError:
+    _ST = []
+    ISSUES.append("missing data/stats.json — run scripts/fetch_stats.py")
+
+def repo_stat(name):
+    for r in _ST:
+        if r["repo"].lower() == name.lower():
+            return r
+    return {"stars": "?", "language": None}
+
+_FM = repo_stat("FindMyGSoC")
+_TN = repo_stat("TENET-AI")
+_CS = repo_stat("Claude-Skills-Security")
+
 STATS = [(1, "DISCLOSED", "1", "CVE-2026-40316", "public vulnerability credit"),
          (2, "STANDARD", "LLM09", "OWASP Top 10 for LLMs", "co-lead, 2026 edition"),
-         (3, "SHIPPED", "178", "FindMyGSoC", "stars, most-starred repo")]
+         (3, "SHIPPED", f"{_FM['stars']}", "FindMyGSoC", "stars, most-starred repo")]
 REPOS = [("01", "FindMyGSoC",
           "Filter all 184 selected GSoC orgs by stack, language and domain. No install.",
-          "HTML · 178 STARS", "findmygsoc.vercel.app"),
+          f"{_FM['language'] or 'HTML'} · {_FM['stars']} STARS", "findmygsoc.vercel.app"),
          ("02", "TENET-AI",
           "LLM firewall: blocks prompt injection, jailbreaks and data extraction under 10ms.",
-          "Python · MIT", "tenet-aiorg.vercel.app"),
+          f"{_TN['language'] or 'Python'} · {_TN['stars']} STARS", "tenet-aiorg.vercel.app"),
          ("03", "Claude-Skills-Security",
-          "A production-grade security triage skill for AI agents.",
-          "SKILL · 8 STARS", "github")]
+          "A production-grade security skill for AI agents.",
+          f"SKILL · {_CS['stars']} STARS", "github")]
 
 def build(name, keys, title, fn, w, h, shared=""):
     d, l = fn(PAL["dark"]), fn(PAL["light"])
@@ -545,7 +601,8 @@ print(f"\ntotal {sum(sizes.values())/1024:.0f} KB across {len(sizes)} cards, "
 for theme, p in PAL.items():
     print(f"\ncontrast on {theme} surface")
     for nm, key, need in (("ink", "ink", 7.0), ("muted", "muted", 4.5),
-                          ("accent", "accent", 4.5), ("alt", "alt", 4.5)):
+                          ("accent", "accent", 4.5), ("accent2", "accent2", 4.5),
+                          ("alt", "alt", 4.5)):
         r = contrast(p[key], p["surface"])
         ok = "ok" if r >= need else "LOW"
         print(f"  {nm:7s} {r:5.2f}:1  need {need}  {ok}")
